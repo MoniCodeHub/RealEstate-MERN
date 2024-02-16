@@ -1,12 +1,14 @@
 import React, { useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { signInStart, signInSuccess, signInFailure   } from '../redux/user/userSlice'
 
 const SignIn = () => {
 
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { loading, error } = useSelector((state) => state.user);   // from userSlice of the redux-toolkit that we initialized
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData ({
@@ -17,7 +19,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const response = await fetch('/api/auth/signin',  
          {
            method: 'POST',
@@ -29,17 +31,16 @@ const SignIn = () => {
       const data = await response.json();
      //  as we defined in the server-api's (index.js) if error occurs then display the message
       if(data.success === false) {   
-       setLoading(false);            
-       setError(data.message);
-       return;
+      dispatch(signInFailure(data.message));
+      return;
       }
-      setLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data));
       navigate('/');
-    }catch (error) {
-      setLoading(false);
-      setError(error.message);     
-    }
+      } catch (error) {
+
+        dispatch(signInFailure(data.message));
+      
+      }
  };
   // console.log(formData);
   
@@ -52,7 +53,7 @@ return (
         className='border p-3 rounded-lg' id='email' onChange={handleChange} />
         <input 
         type="password" placeholder="password"
-        className='border p-3 rounded-lg ' id='password' onChange={handleChange}/>p
+        className='border p-3 rounded-lg ' id='password' onChange={handleChange}/>
         <button disabled={loading} className='bg-slate-700 text-white     
         p-3 rounded-lg uppercase hover:opacity-95
         disabled:opacity-80'>{ loading ? 'Loading...' : 'Sign In' }</button>   
