@@ -1,23 +1,32 @@
-import mongoose from 'mongoose';
+/** @format */
+
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const userSchema = new Schema ({
+const userSchema = new Schema(
+  {
     username: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    avatar: {
         type: String,
-        required: true,
-    }
-}, { timestamps: true }) ;
+        default: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
+    },
+  },
+  { timestamps: true }
+);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

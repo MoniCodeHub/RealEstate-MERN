@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth'
 
 const SignUp = () => {
 
@@ -60,6 +61,7 @@ return (
         p-3 rounded-lg uppercase hover:opacity-95
         disabled:opacity-80'>{ loading ? 'Loading...' : 'Sign Up' }</button>   
         {/* button name displayed as 'Loading' while it's processing or else 'SignUp'     */}
+        <OAuth />
       </form>
       <div className='text-1xl text-center font-semibold my-7'>
           <p>have an account already?</p>

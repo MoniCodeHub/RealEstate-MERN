@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { signInStart, signInSuccess, signInFailure   } from '../redux/user/userSlice'
+import OAuth from '../components/OAuth'
 
 const SignIn = () => {
 
@@ -54,15 +55,16 @@ return (
         <input 
         type="password" placeholder="password"
         className='border p-3 rounded-lg ' id='password' onChange={handleChange}/>
-        <button disabled={loading} className='bg-slate-700 text-white     
+        <button disabled={loading} className='bg-slate-700 text-white font-serif     
         p-3 rounded-lg uppercase hover:opacity-95
         disabled:opacity-80'>{ loading ? 'Loading...' : 'Sign In' }</button>   
         {/* button name displayed as 'Loading' while it's processing or else 'SignUp'     */}
+        <OAuth />
       </form>
       <div className='text-1xl font-semibold my-7'>
           <p> Dont have an account?</p>
           <Link to='/signup'>
-              <span className='text-blue-700'>Sign Up</span>
+              <span className='text-blue-700 font-serif '>Sign Up</span>
           </Link>
       </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}
