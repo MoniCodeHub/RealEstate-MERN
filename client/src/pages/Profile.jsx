@@ -6,7 +6,16 @@ import {
    uploadBytesResumable, 
    getDownloadURL } from "firebase/storage";
 import { app } from '../firebase';
-import { updateUserStart, updateUserSuccess, updateUserFailure} from '../redux/user/userSlice.js';
+import { 
+  updateUserStart, 
+  updateUserSuccess, 
+  updateUserFailure,         
+  deleteUserStart, 
+  deleteUserSuccess, 
+  deleteUserFailure,
+  signOutUserStart, 
+  signOutUserSuccess, 
+  signOutUserFailure } from '../redux/user/userSlice.js';
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -16,6 +25,7 @@ const Profile = () => {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const dispatch = useDispatch();
   // console.log(file);
   console.log(formData);
@@ -60,6 +70,7 @@ const handleChange = (e) => {
   setFormData({ ...formData, [e.target.id]: e.target.value });
 };
 
+//function For 'Update' user button
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
@@ -81,6 +92,42 @@ const handleSubmit = async (e) => {
     
   } catch (error) {
     dispatch(updateUserFailure(error.messsage));
+  }
+};
+
+//Function for 'Delete Account' button
+const handleDelete = async (e) => {
+  try {
+    dispatch(deleteUserStart());
+    const response = await fetch(`/api/user/delete/${currentUser._id}`, {
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    if(data.success === false){
+      dispatch(deleteUserFailure(data.message));
+      return;
+    }
+    dispatch(deleteUserSuccess(data));
+    setDeleteSuccess(true);
+    
+  } catch (error) {
+    dispatch(deleteUserFailure(error.message));
+  }
+
+};
+
+const handleSignOut = async () => {
+  try {
+    dispatch(signOutUserStart());
+    const response = await fetch('/api/auth/signout');
+    const data = await response.json();
+    if(data.success === false) {
+      dispatch(signOutUserFailure(data.message));
+      return;
+    }
+    dispatch(signOutUserSuccess(data))
+  } catch (error) {
+    dispatch(signOutUserFailure(data.message));
   }
 }
   
@@ -141,8 +188,8 @@ const handleSubmit = async (e) => {
         uppercase font-serif hover:opacity-95'>{loading ? 'Loading' : 'Update'}</button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
-        <span className='text-red-600 font-semibold cursor-pointer'>Sign Out</span>
+        <span onClick={handleDelete} className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
+        <span onClick={handleSignOut} className='text-red-600 font-semibold cursor-pointer'>Sign Out</span>
       </div><br/>
       <p className='text-red-600 font-semibold' >{error ? error: ''}</p>
       <p className='text-green-600 font-semibold' >{updateSuccess ? 'User Updated Sccessfully!' : ''}</p>
