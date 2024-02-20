@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import { useSelector,  useDispatch } from 'react-redux';
+import {Link} from "react-router-dom";
 import { 
    getStorage,
    ref,
@@ -185,7 +186,12 @@ const handleSignOut = async () => {
         <button 
         disabled = {loading} 
         className='bg-slate-700 text-white rounded-lg p-3 
-        uppercase font-serif hover:opacity-95'>{loading ? 'Loading' : 'Update'}</button>
+        uppercase font-serif hover:opacity-95'
+        >{loading ? 'Loading' : 'Update'}</button>
+        <Link to='/create-listing' className='bg-pink-300 font-serif font-semibold text-center 
+        p-3 rounded-lg hover:opacity-95'>
+            CREATE LISTING
+        </Link>
       </form>
       <div className='flex justify-between mt-5'>
         <span onClick={handleDelete} className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
