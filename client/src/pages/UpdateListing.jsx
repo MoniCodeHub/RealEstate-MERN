@@ -7,7 +7,7 @@ import {
 
 import { app } from '../firebase';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 const UpdateListing = () => {
     const { currentUser } = useSelector((state) => state.user);
@@ -284,10 +284,13 @@ const UpdateListing = () => {
             
                     ))
                 }
-                <button disabled={loading || uploading } className='p-3 my-5 bg-slate-700 text-white
-                rounded-lg uppercase hover:shadow-lg disabled:opacity-80'>
-                    { loading? 'Updating...' : 'Update Listing'}
-                </button>
+
+                    <button disabled={loading || uploading } className='p-3 my-5 bg-slate-700 text-white
+                    rounded-lg uppercase hover:shadow-lg disabled:opacity-80'>
+                        { loading ? 'Updating...' : 'Update Listing'}
+                    </button>
+
+
                 {error && <p className='text-red-700 text-ellipsis'>{error}</p>}            
             </div>          
         </form>
