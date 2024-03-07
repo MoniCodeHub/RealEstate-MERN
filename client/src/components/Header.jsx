@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useState, useEffect} from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link , useNavigate} from  'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ const Header = () => {
         <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
                 <Link to="/">
                 <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-                    <span className="text-slate-500">Monisha's </span>
+                    <span className="text-pink-700">Monisha's</span>
                     <span className="text-slate-700">Housing Hub</span>
                 </h1>
                 </Link>
