@@ -212,7 +212,7 @@ const CreateListing = () => {
                         <p>Baths</p>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <input type='number' id='regularPrice' min='500' max='300000' required
+                        <input type='number' id='regularPrice' min='500' max='500000' required
                         className='p-3 border border-gray-300 rounded-lg'
                         onChange={handleChange}
                         value={formData.regularPrice} 
