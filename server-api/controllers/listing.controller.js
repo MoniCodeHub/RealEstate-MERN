@@ -69,7 +69,7 @@ export const getForEditListing = async (req, res, next) =>{
 export const getListings = async (req, res, next) => {
   try {
     const limit  = parseInt(req.query.limit) || 9;
-    const startIndex = parseInt(re.query.startIndex) || 0;
+    const startIndex = parseInt(req.query.startIndex) || 0;
     
     let offer = req.query.offer;
     if(offer === undefined || offer === 'false'){
@@ -92,7 +92,7 @@ export const getListings = async (req, res, next) => {
 
     let type = req.query.type;
 
-    if (type === undefined || type === 'false'){
+    if (type === undefined || type === 'all'){
 
       type = { $in: ['sale', 'rent'] }; 
     }
@@ -107,9 +107,10 @@ export const getListings = async (req, res, next) => {
       furnished,
       parking,
       type,
-    }).sort({ [sort]: order})
-    .limit(limit)
-    .skip(startIndex);
+    })
+      .sort({ [sort]: order})
+      .limit(limit)
+      .skip(startIndex);
 
     return res.status(200).json(listings);
 
