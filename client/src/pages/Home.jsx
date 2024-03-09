@@ -129,9 +129,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <footer className="text-gray-600 mb-8 text-center">
-        &copy; {new Date().getFullYear()} Real Estate Inc. All rights reserved.
-      </footer>
+      
     </div>
   );
 }
