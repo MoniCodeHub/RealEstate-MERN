@@ -1,3 +1,5 @@
+/** @format */
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
@@ -8,13 +10,13 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey:  "AIzaSyA74Cyd7dwbSo-f0obclQUyKIvORQYLHz0" ,
+  apiKey: "import.meta.env.FIREBASE_API_KEY",
   authDomain: "real-state-3284a.firebaseapp.com",
   projectId: "real-state-3284a",
   storageBucket: "real-state-3284a.appspot.com",
   messagingSenderId: "540005324719",
   appId: "1:540005324719:web:44e4b54b5a4a0a0584c15a",
-  measurementId: "G-T3G96KNRDL"
+  measurementId: "G-T3G96KNRDL",
 };
 
 // Initialize Firebase
