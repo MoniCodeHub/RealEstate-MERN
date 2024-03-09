@@ -8,10 +8,10 @@ export default function About() {
     <div>
       <h1 className='text-slate-800 text-3xl font-serif font-bold text-center mt-4'
       >About Us</h1>
-      <p className='text-emerald-950 text-center font-semibold mt-4'>Here comes our lovely, friendly and smart gents who can help you find your dream home 
+      <p className='text-emerald-950 text-center font-semibold mt-4 mb-10'>Here comes our lovely, friendly and smart agents who can help you find your dream home 
         with no stress! Feel free to contact them @ 
       </p>
-      <div className="flex justify-around ml-4 mt-4 ">
+      <div className="flex justify-around ml-4 mt-4 gap-0">
             
 
             <div>
